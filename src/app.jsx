@@ -7,7 +7,7 @@ function App() {
   // ───── Global state ─────
   const [xp, setXp] = React.useState(1240);
   const [streak, setStreak] = React.useState(7);
-  const [dailyMinutes, setDailyMinutes] = React.useState(47);
+  const [dailyMinutes, setDailyMinutes] = React.useState(5);
   const [weeklyRetos, setWeeklyRetos] = React.useState(4);
   const level = Math.floor(xp / 500) + 1;
 
@@ -48,7 +48,7 @@ function App() {
   const addXP = (amount) => {
     setXp(x => x + amount);
     // micro-progress: every XP gain bumps daily minutes a little, and skill
-    setDailyMinutes(m => Math.min(60, m + 1));
+    setDailyMinutes(m => Math.min(20, m + 1));
     setSkills(s => ({ ...s, negociacion: Math.min(100, s.negociacion + 2) }));
 
     // float a +XP pill

@@ -3,7 +3,7 @@
 
 window.HomeScreen = function HomeScreen({ state, navigate }) {
   const { streak, xp, dailyMinutes, weeklyRetos, level } = state;
-  const dailyPct = Math.min(100, Math.round((dailyMinutes / 60) * 100));
+  const dailyPct = Math.min(100, Math.round((dailyMinutes / 20) * 100));
   const weeklyPct = Math.min(100, Math.round((weeklyRetos / 5) * 100));
   const xpInLevel = xp % 500;
   const nextLevelXp = 500 - xpInLevel;
@@ -45,7 +45,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
         <p style={{
           margin: '8px 0 0', fontSize: 14, lineHeight: 1.45, color: 'var(--fg-2)',
           maxWidth: 320,
-        }}>Solo <strong style={{ color: 'var(--navy-900)' }}>13 minutos</strong> más para tu meta de hoy. ¡Tú puedes!</p>
+        }}>Solo <strong style={{ color: 'var(--navy-900)' }}>15 minutos</strong> más para tu meta de hoy. ¡Tú puedes!</p>
       </div>
 
       {/* Daily progress + Streak hero card */}
@@ -76,19 +76,53 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
               <div style={{
                 fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 500,
                 color: 'var(--navy-900)', fontVariantNumeric: 'tabular-nums',
-              }}>{dailyMinutes}<span style={{ color: 'var(--fg-3)', fontSize: 12 }}>/60 min</span></div>
+              }}>{dailyMinutes}<span style={{ color: 'var(--fg-3)', fontSize: 12 }}>/20 min</span></div>
             </div>
           </div>
 
-          {/* streak dots — 14 days */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(14, 1fr)', gap: 4, marginBottom: 14 }}>
-            {Array.from({ length: 14 }).map((_, i) => (
-              <div key={i} style={{
-                aspectRatio: '1/1', borderRadius: 4,
-                background: i < streak ? 'var(--lift-500)' : 'var(--paper-100)',
-                opacity: i < streak ? 1 - i * 0.04 : 1,
-              }} />
-            ))}
+          {/* streak circles — week L M M J V S D */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6, marginBottom: 14 }}>
+            {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => {
+              const todayIdx  = 3;                  // jueves
+              const isWeekend = i >= 5;             // sábado y domingo
+              const isPast    = i < todayIdx;
+              const isToday   = i === todayIdx;
+              const lessonDone = isPast && !isWeekend;
+
+              // Weekends: círculo con borde discontinuo, sin relleno sólido
+              if (isWeekend) {
+                return (
+                  <div key={i} style={{
+                    width: '100%', aspectRatio: '1/1', borderRadius: 999,
+                    border: '1.5px dashed var(--paper-300)',
+                    background: 'transparent',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <span style={{
+                      fontSize: 10, fontWeight: 600, letterSpacing: '0.04em',
+                      color: 'var(--fg-3)',
+                    }}>{d}</span>
+                  </div>
+                );
+              }
+
+              return (
+                <div key={i} style={{
+                  width: '100%', aspectRatio: '1/1', borderRadius: 999,
+                  background: lessonDone ? 'var(--lift-500)'
+                             : isToday   ? 'var(--lift-100)'
+                             :             'var(--paper-100)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <span style={{
+                    fontSize: 10, fontWeight: 700, letterSpacing: '0.04em',
+                    color: lessonDone ? '#fff'
+                          : (isPast || isToday) ? 'var(--lift-700)'
+                          : 'var(--fg-3)',
+                  }}>{d}</span>
+                </div>
+              );
+            })}
           </div>
 
           {/* daily minutes bar */}
@@ -104,7 +138,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
           </div>
           <div style={{
             fontSize: 12, color: 'var(--fg-3)', marginTop: 8, lineHeight: 1.4,
-          }}>¡<strong style={{ color: 'var(--navy-900)' }}>{60 - dailyMinutes} min</strong> y mantienes tu racha de hoy!</div>
+          }}>¡<strong style={{ color: 'var(--navy-900)' }}>{20 - dailyMinutes} min</strong> y mantienes tu racha de hoy!</div>
         </div>
       </div>
 
