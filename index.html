@@ -24,6 +24,8 @@
       -webkit-overflow-scrolling: touch;
     }
     .app-scroll::-webkit-scrollbar { width: 0; height: 0; }
+    .scroll-hide { scrollbar-width: none; -ms-overflow-style: none; }
+    .scroll-hide::-webkit-scrollbar { display: none; }
 
     .pressable { transition: transform 120ms var(--ease-out), background 140ms var(--ease-out), box-shadow 140ms var(--ease-out); }
     .pressable:active { transform: scale(0.98); }

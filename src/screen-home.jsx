@@ -8,6 +8,35 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
   const xpInLevel = xp % 500;
   const nextLevelXp = 500 - xpInLevel;
 
+  const [activeCard, setActiveCard] = React.useState(0);
+
+  const courses = [
+    {
+      id: 'negociacion', icon: 'handshake',
+      iconBg: 'var(--tide-100)', iconColor: 'var(--tide-700)',
+      tag: 'En curso', tagBg: 'var(--tide-100)', tagColor: 'var(--tide-700)',
+      title: 'Negociación',
+      desc: 'Aprende a negociar tu salario y cerrar acuerdos en contextos B2B.',
+      progress: 60, xp: 40, cta: 'Continuar',
+    },
+    {
+      id: 'comunicacion', icon: 'message',
+      iconBg: 'var(--azure-100)', iconColor: 'var(--azure-700)',
+      tag: 'Activo', tagBg: 'var(--azure-100)', tagColor: 'var(--azure-700)',
+      title: 'Comunicación efectiva',
+      desc: 'Transmite tus ideas con claridad y adapta tu mensaje a cada audiencia.',
+      progress: 85, xp: 30, cta: 'Continuar',
+    },
+    {
+      id: 'feedback', icon: 'feedback',
+      iconBg: 'var(--violet-100)', iconColor: 'var(--violet-700)',
+      tag: 'Recomendado', tagBg: 'var(--paper-100)', tagColor: 'var(--paper-700)',
+      title: 'Dar feedback',
+      desc: 'Aprende a dar y recibir feedback constructivo para mejorar a tu equipo.',
+      progress: 0, xp: 35, cta: 'Empezar',
+    },
+  ];
+
   const skills = [
     { id: 'negociacion', name: 'Negociación', icon: 'handshake', tag: 'En curso',
       iconBg: 'var(--tide-100)', iconColor: 'var(--tide-700)',
@@ -142,49 +171,93 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
         </div>
       </div>
 
-      {/* Weekly challenge */}
-      <div style={{ padding: '16px 20px 0' }}>
-        <div data-sticker="dark" data-card-radius style={{
-          background: 'var(--navy-900)', color: '#fff',
-          borderRadius: 28, padding: 20, position: 'relative', overflow: 'hidden',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-            <Eyebrow color="var(--tide-300)">Reto semanal</Eyebrow>
-            <span style={{
-              marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 11,
-              color: 'rgba(255,255,255,0.6)',
-            }}>3 días restantes</span>
-          </div>
-          <div style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: 24, lineHeight: 1.15, letterSpacing: '-0.02em',
-            fontWeight: 500,
-            color: '#fff', marginBottom: 14,
-          }}>¡Completa <span style={{ color: 'var(--tide-300)' }}>5 retos</span> de negociación esta semana!</div>
+      {/* Course recommendations carousel */}
+      <div style={{ padding: '20px 0 0' }}>
+        <div style={{ padding: '0 20px', marginBottom: 12 }}>
+          <Eyebrow>Cursos recomendados</Eyebrow>
+        </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="bar-fill" style={{
-              flex: 1, height: 8, background: 'rgba(255,255,255,0.12)',
-              borderRadius: 999, overflow: 'hidden',
-            }}>
+        {/* Scrollable cards */}
+        <div
+          className="scroll-hide"
+          onScroll={e => {
+            const { scrollLeft, scrollWidth, clientWidth } = e.target;
+            const max = scrollWidth - clientWidth;
+            if (max <= 0) return;
+            setActiveCard(Math.round((scrollLeft / max) * (courses.length - 1)));
+          }}
+          style={{
+            display: 'flex', gap: 12,
+            overflowX: 'auto', overflowY: 'hidden',
+            padding: '4px 0',
+            scrollPaddingLeft: 20,
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          <div style={{ flexShrink: 0, width: 20 }} />
+          {courses.map((c, idx) => (
+            <button
+              key={c.id}
+              onClick={() => navigate('detalle', { skillId: c.id })}
+              className="pressable"
+              style={{
+                flex: '0 0 36%', scrollSnapAlign: 'start',
+                background: 'var(--navy-900)',
+                borderRadius: 28, padding: 14,
+                boxShadow: '0 12px 32px -8px rgba(15,30,61,0.35)',
+                border: 0, cursor: 'pointer', textAlign: 'left',
+                display: 'flex', flexDirection: 'column',
+                fontFamily: 'inherit',
+              }}
+            >
+              <Eyebrow color="var(--tide-400)">{c.tag}</Eyebrow>
               <div style={{
-                height: '100%', width: weeklyPct + '%',
-                background: 'linear-gradient(90deg, var(--tide-500), var(--tide-300))',
-                transition: 'width 700ms var(--ease-out)',
-              }} />
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 500,
-              color: '#fff', fontVariantNumeric: 'tabular-nums',
-            }}>{weeklyRetos}<span style={{ color: 'rgba(255,255,255,0.5)' }}>/5</span></div>
-          </div>
-          <div style={{
-            marginTop: 12, fontSize: 12, color: 'rgba(255,255,255,0.6)',
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}>
-            <Icon name="zap" size={12} color="var(--tide-300)" />
-            <span>Recompensa: <strong style={{ color: '#fff' }}>+150 XP</strong> y badge <em style={{ color: 'var(--tide-300)' }}>Negociadora L2</em></span>
-          </div>
+                fontSize: 15, fontWeight: 600, color: '#fff',
+                marginTop: 2, marginBottom: 12, letterSpacing: '-0.01em',
+              }}>{c.title}</div>
+
+              <p style={{
+                fontSize: 13, lineHeight: 1.5, color: 'rgba(255,255,255,0.6)',
+                margin: '0 0 14px',
+              }}>{c.desc}</p>
+
+              {c.progress > 0 && (
+                <div style={{ marginTop: 'auto' }}>
+                  <div className="bar-fill" style={{
+                    height: 5, background: 'rgba(255,255,255,0.1)',
+                    borderRadius: 999, overflow: 'hidden',
+                  }}>
+                    <div style={{
+                      height: '100%', width: c.progress + '%',
+                      background: 'linear-gradient(90deg, var(--tide-500), var(--tide-300))',
+                    }} />
+                  </div>
+                  <div style={{
+                    fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 5,
+                    fontFamily: 'var(--font-mono)',
+                  }}>{c.progress}% completado</div>
+                </div>
+              )}
+            </button>
+          ))}
+          {/* right edge spacer — padding-right unreliable in overflow-x flex */}
+          <div style={{ flexShrink: 0, width: 20 }} />
+        </div>
+
+        {/* Dot indicators */}
+        <div style={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center',
+          gap: 5, marginTop: 12,
+        }}>
+          {courses.map((_, i) => (
+            <div key={i} style={{
+              height: 6, borderRadius: 999,
+              width: i === activeCard ? 18 : 6,
+              background: i === activeCard ? 'var(--navy-900)' : 'var(--paper-300)',
+              transition: 'all 220ms var(--ease-out)',
+            }} />
+          ))}
         </div>
       </div>
 
