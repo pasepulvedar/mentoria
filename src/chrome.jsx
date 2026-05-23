@@ -91,7 +91,7 @@ window.BottomNav = function BottomNav({ active, onChange }) {
   ];
   return (
     <div style={{
-      position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 40,
+      position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40,
       background: 'var(--paper-50)',
       borderTop: '1px solid var(--border)',
       paddingBottom: 28,

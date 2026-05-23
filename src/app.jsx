@@ -126,35 +126,29 @@ function App() {
   return (
     <ThemeWrap tweaks={tweaks}>
       <div data-screen-label={'Mentor.ia · ' + route} style={{
-        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        position: 'fixed', inset: 0,
+        display: 'flex', flexDirection: 'column',
+        background: 'var(--paper-50)',
       }}>
-        <IOSDevice width={402} height={874}>
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', flexDirection: 'column',
-            background: 'var(--paper-50)',
-          }}>
-            {showHeader && (
-              <AppHeader streak={streak} xp={xp} level={level}
-                showMascot={tweaks.mascot}
-                onProfileTap={() => onTabChange('perfil')} />
-            )}
+        {showHeader && (
+          <AppHeader streak={streak} xp={xp} level={level}
+            showMascot={tweaks.mascot}
+            onProfileTap={() => onTabChange('perfil')} />
+        )}
 
-            <div className="app-scroll" key={route /* re-mount → re-animate */}>
-              {screen}
-            </div>
+        <div className="app-scroll" key={route /* re-mount → re-animate */}>
+          {screen}
+        </div>
 
-            {showBottomNav && <BottomNav active={tab} onChange={onTabChange} />}
+        {showBottomNav && <BottomNav active={tab} onChange={onTabChange} />}
 
-            {/* Floating overlays */}
-            <XPBurst bursts={bursts} />
-            {tweaks.confetti && <Confetti trigger={confettiKey} />}
-            <Toast toast={toast} />
-            {levelUp !== null && (
-              <LevelUpModal level={levelUp} onClose={() => setLevelUp(null)} />
-            )}
-          </div>
-        </IOSDevice>
+        {/* Floating overlays */}
+        <XPBurst bursts={bursts} />
+        {tweaks.confetti && <Confetti trigger={confettiKey} />}
+        <Toast toast={toast} />
+        {levelUp !== null && (
+          <LevelUpModal level={levelUp} onClose={() => setLevelUp(null)} />
+        )}
       </div>
       <MentorTweaks tweaks={tweaks} setTweak={setTweak} />
     </ThemeWrap>
