@@ -57,7 +57,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
       <div style={{ padding: '14px 20px 18px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
           <div style={{
-            width: 52, height: 52, borderRadius: 14,
+            width: 52, height: 52, borderRadius: 18,
             background: 'var(--tide-100)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
@@ -91,7 +91,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
               style={{
                 background: 'var(--paper-0)',
                 border: '1px solid var(--border)',
-                borderRadius: 12, padding: 14,
+                borderRadius: 16, padding: 14,
                 display: 'flex', alignItems: 'center', gap: 12,
                 position: 'relative',
                 cursor: m.status === 'locked' ? 'help' : 'default',
@@ -137,7 +137,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
                   position: 'absolute', top: '-10px', left: 20, right: 20,
                   transform: 'translateY(-100%)',
                   background: 'var(--navy-900)', color: '#fff',
-                  padding: '10px 12px', borderRadius: 10,
+                  padding: '10px 12px', borderRadius: 14,
                   fontSize: 12, lineHeight: 1.4, zIndex: 10,
                   boxShadow: 'var(--shadow-lg)',
                 }}>
@@ -169,7 +169,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
                   background: active ? 'var(--navy-900)' : 'var(--paper-0)',
                   color: active ? '#fff' : 'var(--navy-900)',
                   border: active ? '1px solid var(--navy-900)' : '1px solid var(--border)',
-                  borderRadius: 12, padding: '10px 8px',
+                  borderRadius: 16, padding: '10px 8px',
                   display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
                   fontFamily: 'inherit',
                 }}>
@@ -215,7 +215,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
         <Eyebrow style={{ marginBottom: 10 }}>Escenario · {difficulty}</Eyebrow>
         <div style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 14, padding: 16,
+          borderRadius: 20, padding: 16,
         }}>
           <div style={{
             fontFamily: 'var(--font-serif)',
@@ -248,7 +248,7 @@ window.DetalleScreen = function DetalleScreen({ state, navigate, back }) {
         <button onClick={() => navigate('simulacion', { skillId: 'negociacion', difficulty, warmup })}
           className="btn-3d btn-3d-tide" style={{
             width: '100%',
-            borderRadius: 16, padding: '16px 18px',
+            borderRadius: 20, padding: '16px 18px',
             fontSize: 16,
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
           }}>

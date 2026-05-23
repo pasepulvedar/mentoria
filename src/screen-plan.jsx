@@ -61,7 +61,7 @@ window.PlanScreen = function PlanScreen({ state, navigate }) {
       <div style={{ padding: '0 20px' }}>
         <div style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 16, padding: 12,
+          borderRadius: 20, padding: 12,
           display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4,
         }}>
           {days.map(d => {
@@ -73,7 +73,7 @@ window.PlanScreen = function PlanScreen({ state, navigate }) {
               <button key={d.i} onClick={() => onDayTap(d.i)} className="pressable" style={{
                 background: isSelected ? 'var(--navy-900)' : 'transparent',
                 color: isSelected ? '#fff' : 'var(--navy-900)',
-                border: 0, borderRadius: 10, padding: '8px 4px',
+                border: 0, borderRadius: 12, padding: '8px 4px',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
                 cursor: 'pointer', fontFamily: 'inherit',
               }}>
@@ -128,7 +128,7 @@ window.PlanScreen = function PlanScreen({ state, navigate }) {
               style={{
                 background: 'var(--paper-0)',
                 border: isCurrent || isSelected ? '1px solid var(--tide-500)' : '1px solid var(--border)',
-                borderRadius: 14, padding: 14,
+                borderRadius: 20, padding: 14,
                 display: 'flex', flexDirection: 'column', gap: 10,
                 position: 'relative',
                 boxShadow: isSelected ? '0 4px 12px -2px rgba(29,158,117,0.18)' : 'none',

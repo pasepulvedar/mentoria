@@ -94,6 +94,7 @@ window.BottomNav = function BottomNav({ active, onChange }) {
       position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40,
       background: 'var(--paper-50)',
       borderTop: '1px solid var(--border)',
+      borderRadius: '32px 32px 0 0',
       paddingBottom: 28,
     }}>
       <div style={{
@@ -168,12 +169,12 @@ window.Toast = function Toast({ toast }) {
       position: 'absolute', left: '50%', transform: 'translateX(-50%)',
       bottom: 110, zIndex: 70, width: 'calc(100% - 32px)', maxWidth: 360,
       background: 'var(--navy-900)', color: '#fff',
-      padding: '12px 14px', borderRadius: 14,
+      padding: '12px 14px', borderRadius: 20,
       display: 'flex', alignItems: 'center', gap: 12,
       boxShadow: '0 16px 32px -8px rgba(15,30,61,0.4)',
     }}>
       <div style={{
-        width: 36, height: 36, borderRadius: 10,
+        width: 36, height: 36, borderRadius: 14,
         background: 'rgba(242,137,27,0.18)',
         border: '1px solid rgba(242,137,27,0.4)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -204,7 +205,7 @@ window.LevelUpModal = function LevelUpModal({ level, onClose }) {
       padding: 24,
     }}>
       <div className="modal-in" style={{
-        background: 'var(--paper-0)', borderRadius: 24, padding: 28,
+        background: 'var(--paper-0)', borderRadius: 28, padding: 28,
         width: '100%', maxWidth: 320, position: 'relative', overflow: 'hidden',
         boxShadow: '0 24px 48px -12px rgba(15,30,61,0.4)',
         textAlign: 'center',
@@ -242,7 +243,7 @@ window.LevelUpModal = function LevelUpModal({ level, onClose }) {
           un nuevo reto de práctica.
         </div>
         <button onClick={onClose} className="btn-3d btn-3d-tide" style={{
-          width: '100%', borderRadius: 16, padding: '14px 18px', fontSize: 15,
+          width: '100%', borderRadius: 20, padding: '14px 18px', fontSize: 15,
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         }}>
           ¡Vamos! <Icon name="arrow" size={16} color="#fff" strokeWidth={2.5} />
@@ -266,7 +267,7 @@ window.Modal = function Modal({ children, onClose, dark = false }) {
       <div className="modal-in" onClick={e => e.stopPropagation()} style={{
         background: dark ? 'var(--navy-900)' : 'var(--paper-0)',
         color: dark ? '#fff' : 'inherit',
-        borderRadius: 20, padding: 22,
+        borderRadius: 24, padding: 22,
         width: '100%', maxWidth: 340, position: 'relative',
         boxShadow: '0 24px 48px -12px rgba(15,30,61,0.4)',
       }}>{children}</div>

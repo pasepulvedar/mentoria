@@ -53,14 +53,14 @@ window.RankingScreen = function RankingScreen({ state }) {
       {/* Tabs */}
       <div style={{ padding: '0 20px' }}>
         <div style={{
-          background: 'var(--paper-100)', borderRadius: 12,
+          background: 'var(--paper-100)', borderRadius: 16,
           padding: 4, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4,
         }}>
           {tabs.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} className="pressable" style={{
               background: tab === t.id ? 'var(--paper-0)' : 'transparent',
               color: tab === t.id ? 'var(--navy-900)' : 'var(--fg-3)',
-              border: 0, borderRadius: 10, padding: '9px 8px',
+              border: 0, borderRadius: 12, padding: '9px 8px',
               fontSize: 13, fontWeight: 600, cursor: 'pointer',
               boxShadow: tab === t.id ? 'var(--shadow-xs)' : 'none',
               fontFamily: 'inherit',
@@ -73,11 +73,11 @@ window.RankingScreen = function RankingScreen({ state }) {
       <div style={{ padding: '18px 20px 0' }}>
         <div data-sticker="warm" data-card-radius style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 16, padding: 16, position: 'relative', overflow: 'hidden',
+          borderRadius: 24, padding: 16, position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
             <div style={{
-              width: 32, height: 32, borderRadius: 8, background: 'var(--lift-100)',
+              width: 32, height: 32, borderRadius: 12, background: 'var(--lift-100)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Icon name="users" size={16} color="var(--lift-700)" />
@@ -119,7 +119,7 @@ window.RankingScreen = function RankingScreen({ state }) {
         </div>
         <div style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 14, overflow: 'hidden',
+          borderRadius: 20, overflow: 'hidden',
         }}>
           {display.map((r, i) => {
             const isPodium = r.rank <= 3;
@@ -205,7 +205,7 @@ window.RankingScreen = function RankingScreen({ state }) {
               style={{
                 background: b.unlocked ? 'var(--paper-0)' : 'var(--paper-100)',
                 border: b.unlocked ? '1px solid var(--border)' : '1px dashed var(--paper-300)',
-                borderRadius: 14, padding: '14px 8px',
+                borderRadius: 20, padding: '14px 8px',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
                 position: 'relative', cursor: 'pointer',
                 opacity: b.unlocked ? 1 : 0.55,
@@ -238,7 +238,7 @@ window.RankingScreen = function RankingScreen({ state }) {
                   position: 'absolute', top: '-8px', left: '50%',
                   transform: 'translate(-50%, -100%)',
                   background: 'var(--navy-900)', color: '#fff',
-                  padding: '8px 10px', borderRadius: 8,
+                  padding: '8px 10px', borderRadius: 12,
                   fontSize: 11, lineHeight: 1.4, zIndex: 5,
                   width: 160, textAlign: 'center',
                   boxShadow: 'var(--shadow-lg)',

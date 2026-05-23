@@ -178,7 +178,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
             <Avatar />
             <div style={{
               background: 'var(--paper-0)', border: '1px solid var(--border)',
-              borderRadius: '4px 16px 16px 16px',
+              borderRadius: '4px 20px 20px 20px',
               padding: '12px 14px',
               display: 'inline-flex', alignItems: 'center', gap: 4,
             }}>
@@ -222,7 +222,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
           rows={1}
           style={{
             flex: 1, resize: 'none',
-            border: '1px solid var(--border)', borderRadius: 12,
+            border: '1px solid var(--border)', borderRadius: 18,
             padding: '12px 14px', fontSize: 14, lineHeight: 1.4,
             background: 'var(--paper-50)', color: 'var(--navy-900)',
             outline: 'none', maxHeight: 100,
@@ -233,7 +233,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
         />
         <button onClick={sendMessage} className="pressable" disabled={!input.trim() || isTyping}
           style={{
-            width: 44, height: 44, borderRadius: 12,
+            width: 44, height: 44, borderRadius: 16,
             background: input.trim() && !isTyping ? 'var(--navy-900)' : 'var(--paper-200)',
             color: '#fff', border: 0, cursor: input.trim() && !isTyping ? 'pointer' : 'default',
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -248,7 +248,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
         <Modal onClose={() => setTipOpen(false)}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
             <div style={{
-              width: 32, height: 32, borderRadius: 8, background: 'var(--tide-100)',
+              width: 32, height: 32, borderRadius: 12, background: 'var(--tide-100)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Icon name="bulb" size={18} color="var(--tide-700)" />
@@ -262,7 +262,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
             Antes de aceptar un %, propón tú un rango concreto. Por ejemplo: "<em style={{ color: 'var(--navy-900)', fontFamily: 'var(--font-serif)', fontWeight: 600 }}>Con el 40% de productividad, un rango de 14-16% sería justo.</em>"
           </p>
           <button onClick={() => setTipOpen(false)} className="btn-3d btn-3d-navy" style={{
-            width: '100%', borderRadius: 14, padding: '12px 14px', fontSize: 14,
+            width: '100%', borderRadius: 20, padding: '12px 14px', fontSize: 14,
           }}>¡Entendido!</button>
         </Modal>
       )}
@@ -284,10 +284,10 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
           </p>
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={onResume} className="btn-3d btn-3d-paper" style={{
-              flex: 1, borderRadius: 14, padding: '12px 14px', fontSize: 13,
+              flex: 1, borderRadius: 20, padding: '12px 14px', fontSize: 13,
             }}>Reanudar</button>
             <button onClick={onContinueFromPause} className="btn-3d btn-3d-tide" style={{
-              flex: 1.4, borderRadius: 14, padding: '12px 14px', fontSize: 13,
+              flex: 1.4, borderRadius: 20, padding: '12px 14px', fontSize: 13,
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             }}>
               ¡Sí, continuar! <Icon name="arrow" size={14} color="#fff" strokeWidth={2.5} />
@@ -310,7 +310,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
           </div>
           <div style={{
             background: 'var(--paper-50)', border: '1px solid var(--border)',
-            borderRadius: 12, padding: 14, marginBottom: 16,
+            borderRadius: 16, padding: 14, marginBottom: 16,
             display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4,
           }}>
             <Metric label="Tiempo" value={fmt(timer)} />
@@ -318,7 +318,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
             <Metric label="XP" value={'+' + xpEarned} accent />
           </div>
           <button onClick={() => navigate('fortalezas', { sessionXP: xpEarned })} className="btn-3d btn-3d-tide" style={{
-            width: '100%', borderRadius: 16, padding: '14px 18px', fontSize: 15,
+            width: '100%', borderRadius: 20, padding: '14px 18px', fontSize: 15,
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           }}>
             ¡Ver mis fortalezas! <Icon name="arrow" size={16} color="#fff" strokeWidth={2.5} />
@@ -332,7 +332,7 @@ window.SimulacionScreen = function SimulacionScreen({ state, navigate, back, add
 function Avatar() {
   return (
     <div style={{
-      width: 26, height: 26, borderRadius: 8, flexShrink: 0,
+      width: 26, height: 26, borderRadius: 12, flexShrink: 0,
       background: 'var(--navy-900)', color: '#fff',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       fontFamily: 'var(--font-serif)', fontStyle: 'italic',
@@ -354,7 +354,7 @@ function Bubble({ role, text }) {
         background: isUser ? 'var(--navy-900)' : 'var(--paper-0)',
         color: isUser ? '#fff' : 'var(--navy-900)',
         border: isUser ? 'none' : '1px solid var(--border)',
-        borderRadius: isUser ? '16px 16px 4px 16px' : '4px 16px 16px 16px',
+        borderRadius: isUser ? '20px 20px 4px 20px' : '4px 20px 20px 20px',
         padding: '10px 14px',
         fontSize: 14, lineHeight: 1.45,
         boxShadow: isUser ? 'none' : 'var(--shadow-xs)',

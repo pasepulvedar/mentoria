@@ -29,7 +29,7 @@ window.FortalezasScreen = function FortalezasScreen({ state, navigate }) {
       <div style={{ padding: '0 20px' }}>
         <div data-sticker="primary" data-card-radius style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 20, padding: 20, position: 'relative', overflow: 'hidden',
+          borderRadius: 28, padding: 20, position: 'relative', overflow: 'hidden',
         }}>
           <Radar skills={skills} order={order} labels={labels} />
           <div style={{
@@ -46,7 +46,7 @@ window.FortalezasScreen = function FortalezasScreen({ state, navigate }) {
       {/* Tab toggle */}
       <div style={{ padding: '20px 20px 0' }}>
         <div style={{
-          background: 'var(--paper-100)', borderRadius: 12,
+          background: 'var(--paper-100)', borderRadius: 16,
           padding: 4, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4,
         }}>
           {[
@@ -56,7 +56,7 @@ window.FortalezasScreen = function FortalezasScreen({ state, navigate }) {
             <button key={t.id} onClick={() => setTab(t.id)} className="pressable" style={{
               background: tab === t.id ? 'var(--paper-0)' : 'transparent',
               color: tab === t.id ? 'var(--navy-900)' : 'var(--fg-3)',
-              border: 0, borderRadius: 10, padding: '10px 8px',
+              border: 0, borderRadius: 12, padding: '10px 8px',
               fontSize: 13, fontWeight: 600, cursor: 'pointer',
               boxShadow: tab === t.id ? 'var(--shadow-xs)' : 'none',
               fontFamily: 'inherit',
@@ -80,7 +80,7 @@ window.FortalezasScreen = function FortalezasScreen({ state, navigate }) {
       <div style={{ padding: '22px 20px 0' }}>
         <div data-sticker="dark" data-card-radius style={{
           background: 'var(--navy-900)', color: '#fff',
-          borderRadius: 16, padding: 18, position: 'relative', overflow: 'hidden',
+          borderRadius: 24, padding: 18, position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <Icon name="sparkles" size={14} color="var(--tide-300)" />
@@ -225,11 +225,11 @@ function SkillRow({ skill, mode, onPractice }) {
   return (
     <div style={{
       background: 'var(--paper-0)', border: '1px solid var(--border)',
-      borderRadius: 14, padding: 14,
+      borderRadius: 20, padding: 14,
       display: 'flex', alignItems: 'center', gap: 12,
     }}>
       <div style={{
-        width: 44, height: 44, borderRadius: 10,
+        width: 44, height: 44, borderRadius: 14,
         background: isWeak ? 'var(--lift-100)' : 'var(--tide-100)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexShrink: 0,
@@ -255,7 +255,7 @@ function SkillRow({ skill, mode, onPractice }) {
       </div>
       {isWeak && (
         <button onClick={onPractice} className="btn-3d btn-3d-tide" style={{
-          borderRadius: 12, padding: '9px 14px',
+          borderRadius: 16, padding: '9px 14px',
           fontSize: 12,
           display: 'inline-flex', alignItems: 'center', gap: 4,
           flexShrink: 0,
@@ -271,7 +271,7 @@ function SkillRow({ skill, mode, onPractice }) {
 function EmptyHint({ text }) {
   return (
     <div style={{
-      background: 'var(--paper-100)', borderRadius: 12, padding: 14,
+      background: 'var(--paper-100)', borderRadius: 16, padding: 14,
       fontSize: 13, color: 'var(--fg-3)', textAlign: 'center', lineHeight: 1.5,
     }}>{text}</div>
   );

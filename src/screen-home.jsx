@@ -52,12 +52,12 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
       <div style={{ padding: '0 20px' }}>
         <div data-sticker="primary" data-card-radius style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 20, padding: 20, position: 'relative', overflow: 'hidden',
+          borderRadius: 28, padding: 20, position: 'relative', overflow: 'hidden',
           boxShadow: 'var(--shadow-xs)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
             <div style={{
-              width: 32, height: 32, borderRadius: 8, background: 'var(--lift-100)',
+              width: 32, height: 32, borderRadius: 12, background: 'var(--lift-100)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <div className="fire-pulse" style={{ display: 'inline-flex' }}>
@@ -112,7 +112,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
       <div style={{ padding: '16px 20px 0' }}>
         <div data-sticker="dark" data-card-radius style={{
           background: 'var(--navy-900)', color: '#fff',
-          borderRadius: 20, padding: 20, position: 'relative', overflow: 'hidden',
+          borderRadius: 28, padding: 20, position: 'relative', overflow: 'hidden',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
             <Eyebrow color="var(--tide-300)">Reto semanal</Eyebrow>
@@ -169,7 +169,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
               className="pressable" style={{
                 textAlign: 'left', cursor: 'pointer',
                 background: 'var(--paper-0)', border: s.accent ? '1px solid var(--tide-500)' : '1px solid var(--border)',
-                borderRadius: 14, padding: 14,
+                borderRadius: 24, padding: 14,
                 display: 'flex', alignItems: 'center', gap: 12,
                 fontFamily: 'inherit',
                 boxShadow: s.accent
@@ -177,7 +177,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                   : 'none',
               }}>
               <div style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40, height: 40, borderRadius: 14,
                 background: s.iconBg,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,

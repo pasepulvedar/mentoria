@@ -178,7 +178,7 @@ function PerfilScreen({ state }) {
       <div style={{ padding: '0 20px' }}>
         <div style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 16, padding: 18,
+          borderRadius: 20, padding: 18,
           display: 'flex', alignItems: 'center', gap: 14,
         }}>
           <div style={{
@@ -199,7 +199,7 @@ function PerfilScreen({ state }) {
         <div style={{
           marginTop: 12,
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 16, padding: 18,
+          borderRadius: 20, padding: 18,
           display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4,
         }}>
           {stats.map(s => (
@@ -221,7 +221,7 @@ function PerfilScreen({ state }) {
         <Eyebrow style={{ marginBottom: 10 }}>Ajustes</Eyebrow>
         <div style={{
           background: 'var(--paper-0)', border: '1px solid var(--border)',
-          borderRadius: 14, overflow: 'hidden',
+          borderRadius: 20, overflow: 'hidden',
         }}>
           {items.map((it, i) => (
             <div key={i} style={{
