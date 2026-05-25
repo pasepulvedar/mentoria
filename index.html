@@ -86,6 +86,13 @@
     }
     .burst { animation: burst 1.4s var(--ease-out) infinite; }
 
+    /* Logo gentle float */
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%       { transform: translateY(-4px) rotate(3deg); }
+    }
+    .logo-float { animation: logoFloat 3.2s ease-in-out infinite; transform-origin: center; }
+
     /* Rank rise indicator */
     @keyframes rankRise {
       0% { transform: translateY(8px); opacity: 0; }

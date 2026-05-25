@@ -104,7 +104,7 @@ window.RankingScreen = function RankingScreen({ state }) {
             }} />
           </div>
           <div style={{ fontSize: 11, color: 'var(--fg-3)', marginTop: 8, fontFamily: 'var(--font-mono)' }}>
-            Si lo conseguís, todo el equipo desbloquea el badge <strong style={{ color: 'var(--navy-900)' }}>Pulso colectivo</strong>.
+            Si lo lográis, todo el equipo desbloquea el badge <strong style={{ color: 'var(--navy-900)' }}>Pulso colectivo</strong>.
           </div>
         </div>
       </div>

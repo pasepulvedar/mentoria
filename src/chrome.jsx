@@ -18,12 +18,9 @@ window.AppHeader = function AppHeader({ streak, xp, level, onProfileTap, showMas
     }}>
       {/* logo mark / mascot */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0 }}>
-        {showMascot ? (
-          <Mascot size={36} />
-        ) : (
-          <img src="design/mentoria-mark.png" alt="Mentor.ia"
-            style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
-        )}
+        <img src="design/mentoria-mark.png" alt="Mentor.ia"
+          className="logo-float"
+          style={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ minWidth: 0 }}>
           <div style={{
             fontSize: 11, fontWeight: 600, letterSpacing: '0.16em',
