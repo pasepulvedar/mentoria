@@ -10,7 +10,7 @@ window.AppHeader = function AppHeader({ streak, xp, level, onProfileTap, showMas
   const pct = (xpInLevel / 500) * 100;
   return (
     <div style={{
-      paddingTop: 54, paddingLeft: 20, paddingRight: 20, paddingBottom: 14,
+      paddingTop: 14, paddingLeft: 20, paddingRight: 20, paddingBottom: 14,
       display: 'flex', alignItems: 'center', gap: 10,
       background: 'var(--paper-50)',
       borderBottom: '1px solid var(--border)',
