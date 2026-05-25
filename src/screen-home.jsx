@@ -22,7 +22,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
     {
       id: 'comunicacion', icon: 'message',
       iconBg: 'var(--azure-100)', iconColor: 'var(--azure-700)',
-      tag: 'Activo', tagBg: 'var(--azure-100)', tagColor: 'var(--azure-700)',
+      tag: 'En curso', tagBg: 'var(--azure-100)', tagColor: 'var(--azure-700)',
       title: 'Comunicación efectiva',
       desc: 'Transmite tus ideas con claridad y adapta tu mensaje a cada audiencia.',
       progress: 85, xp: 30, cta: 'Continuar',
@@ -42,21 +42,21 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
       iconBg: 'var(--tide-100)', iconColor: 'var(--tide-700)',
       tagColor: 'var(--tide-700)', tagBg: 'var(--tide-100)',
       progress: 60, accent: true, accentColor: 'var(--tide-500)' },
-    { id: 'comunicacion', name: 'Comunicación efectiva', icon: 'message', tag: 'Activo',
+    { id: 'comunicacion', name: 'Comunicación efectiva', icon: 'message', tag: 'En curso',
       iconBg: 'var(--azure-100)', iconColor: 'var(--azure-700)',
       tagColor: 'var(--azure-700)', tagBg: 'var(--azure-100)', progress: 85 },
-    { id: 'feedback', name: 'Feedback', icon: 'feedback', tag: 'Activo',
+    { id: 'feedback', name: 'Feedback', icon: 'feedback', tag: 'En curso',
       iconBg: 'var(--violet-100)', iconColor: 'var(--violet-700)',
       tagColor: 'var(--violet-700)', tagBg: 'var(--violet-100)', progress: 70 },
     { id: 'liderazgo', name: 'Liderazgo de equipos', icon: 'users', tag: 'Recomendado',
       iconBg: 'var(--amber-100)', iconColor: 'var(--amber-700)',
-      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 55 },
+      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 0 },
     { id: 'decisiones', name: 'Toma de decisiones', icon: 'sliders', tag: 'Recomendado',
       iconBg: 'var(--teal-100)', iconColor: 'var(--teal-700)',
-      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 60 },
+      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 0 },
     { id: 'conflictos', name: 'Gestión de conflictos', icon: 'sparkles', tag: 'Gap detectado',
       iconBg: 'var(--rose-100)', iconColor: 'var(--rose-700)',
-      tagColor: 'var(--lift-700)', tagBg: 'var(--lift-100)', progress: 20 },
+      tagColor: 'var(--lift-700)', tagBg: 'var(--lift-100)', progress: 0 },
   ];
 
   return (
@@ -222,23 +222,26 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                 margin: '0 0 14px',
               }}>{c.desc}</p>
 
-              {c.progress > 0 && (
-                <div style={{ marginTop: 'auto' }}>
-                  <div className="bar-fill" style={{
-                    height: 5, background: 'rgba(255,255,255,0.1)',
-                    borderRadius: 999, overflow: 'hidden',
-                  }}>
-                    <div style={{
-                      height: '100%', width: c.progress + '%',
-                      background: 'linear-gradient(90deg, var(--tide-500), var(--tide-300))',
-                    }} />
-                  </div>
+              <div style={{ marginTop: 'auto' }}>
+                <div className="bar-fill" style={{
+                  height: 5, background: 'rgba(255,255,255,0.1)',
+                  borderRadius: 999, overflow: 'hidden',
+                }}>
+                  <div style={{
+                    height: '100%',
+                    width: c.tag === 'En curso' ? c.progress + '%' : '100%',
+                    background: c.tag === 'En curso'
+                      ? 'linear-gradient(90deg, var(--tide-500), var(--tide-300))'
+                      : 'rgba(255,255,255,0.12)',
+                  }} />
+                </div>
+                {c.tag === 'En curso' && (
                   <div style={{
                     fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 5,
                     fontFamily: 'var(--font-mono)',
                   }}>{c.progress}% completado</div>
-                </div>
-              )}
+                )}
+              </div>
             </button>
           ))}
           {/* right edge spacer — padding-right unreliable in overflow-x flex */}
@@ -258,6 +261,54 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
               transition: 'all 220ms var(--ease-out)',
             }} />
           ))}
+        </div>
+      </div>
+
+      {/* Explore by skill */}
+      <div style={{ padding: '24px 20px 0' }}>
+        <Eyebrow style={{ marginBottom: 12 }}>Explora por habilidad</Eyebrow>
+        <div className="scroll-hide" style={{
+          display: 'flex', flexDirection: 'row', gap: 10,
+          overflowX: 'auto', paddingBottom: 4,
+        }}>
+          {[
+            { label: 'Comunicación',          icon: 'message',   id: 'comunicacion' },
+            { label: 'Liderazgo',             icon: 'users',     id: 'liderazgo' },
+            { label: 'Negociación',           icon: 'handshake', id: 'negociacion' },
+            { label: 'Gestión de conflictos', icon: 'sparkles',  id: 'conflictos' },
+            { label: 'Toma de decisiones',    icon: 'sliders',   id: 'decisiones' },
+          ].map((cat, i) => {
+            const selected = i === 0;
+            return (
+              <button key={cat.id}
+                onClick={() => navigate('detalle', { skillId: cat.id })}
+                className="pressable"
+                style={{
+                  flex: '0 0 88px',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  justifyContent: 'center', gap: 8,
+                  background: selected ? 'var(--navy-900)' : 'var(--paper-0)',
+                  border: selected ? '1px solid var(--navy-900)' : '1px solid var(--border)',
+                  borderRadius: 20, padding: '16px 8px',
+                  cursor: 'pointer', fontFamily: 'inherit',
+                }}>
+                <div style={{
+                  width: 36, height: 36, borderRadius: 12,
+                  background: selected ? 'rgba(255,255,255,0.12)' : 'var(--tide-100)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Icon name={cat.icon} size={18} color={selected ? '#fff' : 'var(--tide-700)'} />
+                </div>
+                <span style={{
+                  fontSize: 12, fontWeight: 500,
+                  color: selected ? '#fff' : 'var(--tide-700)',
+                  textAlign: 'center', lineHeight: 1.3,
+                }}>
+                  {cat.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -304,12 +355,19 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                   height: 4, background: 'var(--paper-100)',
                   borderRadius: 999, overflow: 'hidden',
                 }}>
-                  <div style={{
-                    height: '100%', width: s.progress + '%',
-                    background: s.accent
-                      ? 'linear-gradient(90deg, var(--tide-700), var(--tide-500))'
-                      : 'var(--navy-900)',
-                  }} />
+                  {s.tag === 'En curso' ? (
+                    <div style={{
+                      height: '100%', width: s.progress + '%',
+                      background: s.accent
+                        ? 'linear-gradient(90deg, var(--tide-700), var(--tide-500))'
+                        : 'var(--navy-900)',
+                    }} />
+                  ) : (
+                    <div style={{
+                      height: '100%', width: '100%',
+                      background: 'var(--paper-200)',
+                    }} />
+                  )}
                 </div>
               </div>
               <Icon name="chevron" size={16} color="var(--fg-3)" />
