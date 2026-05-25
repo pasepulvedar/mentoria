@@ -202,7 +202,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
               onClick={() => navigate('detalle', { skillId: c.id })}
               className="pressable"
               style={{
-                flex: '0 0 36%', scrollSnapAlign: 'start',
+                flex: '0 0 44%', scrollSnapAlign: 'start',
                 background: 'var(--navy-900)',
                 borderRadius: 28, padding: 14,
                 boxShadow: '0 12px 32px -8px rgba(15,30,61,0.35)',
