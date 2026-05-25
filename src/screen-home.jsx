@@ -391,27 +391,8 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                 <Icon name={s.icon} size={20} color={s.iconColor} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                  <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--navy-900)' }}>{s.name}</div>
-                  <span style={{
-                    fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase',
-                    color: diffColor[s.tag]?.tagColor, background: diffColor[s.tag]?.tagBg,
-                    padding: '2px 6px', borderRadius: 999, flexShrink: 0,
-                  }}>{s.tag}</span>
-                  <span style={{
-                    marginLeft: 'auto', flexShrink: 0,
-                    display: 'inline-flex', alignItems: 'center', gap: 3,
-                    fontSize: 11, fontFamily: 'var(--font-mono)',
-                    color: 'var(--tide-700)', fontWeight: 500,
-                  }}>
-                    <Icon name="zap" size={11} color="var(--tide-700)" />
-                    +{s.xp} XP
-                  </span>
-                </div>
-                <div style={{
-                  height: 4, background: 'var(--paper-100)',
-                  borderRadius: 999, overflow: 'hidden',
-                }}>
+                <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--navy-900)', marginBottom: 6 }}>{s.name}</div>
+                <div style={{ height: 4, background: 'var(--paper-100)', borderRadius: 999, overflow: 'hidden', marginBottom: 4 }}>
                   {s.progress > 0 ? (
                     <div style={{
                       height: '100%', width: s.progress + '%',
@@ -420,21 +401,36 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                         : 'var(--navy-900)',
                     }} />
                   ) : (
-                    <div style={{
-                      height: '100%', width: '100%',
-                      background: 'var(--paper-200)',
-                    }} />
+                    <div style={{ height: '100%', width: '100%', background: 'var(--paper-200)' }} />
                   )}
                 </div>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 3,
+                  fontSize: 11, fontFamily: 'var(--font-mono)',
+                  color: 'var(--tide-700)', fontWeight: 500,
+                }}>
+                  <Icon name="zap" size={11} color="var(--tide-700)" />
+                  +{s.xp} XP
+                </span>
               </div>
-              <button
-                onClick={e => { e.stopPropagation(); navigate('detalle', { skillId: s.id }); }}
-                className={s.progress > 0 ? 'btn-3d btn-3d-tide' : 'btn-3d btn-3d-paper'}
-                style={{ borderRadius: 999, padding: '7px 12px', fontSize: 11,
-                  display: 'inline-flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
-                {s.progress > 0 ? 'Continuar' : 'Empezar'}
-                <Icon name="arrow" size={11} color={s.progress > 0 ? '#fff' : 'var(--navy-900)'} strokeWidth={2.5} />
-              </button>
+              <div style={{
+                display: 'flex', flexDirection: 'column', alignItems: 'flex-end',
+                justifyContent: 'space-between', flexShrink: 0, alignSelf: 'stretch',
+              }}>
+                <span style={{
+                  fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase',
+                  color: diffColor[s.tag]?.tagColor, background: diffColor[s.tag]?.tagBg,
+                  padding: '2px 6px', borderRadius: 999,
+                }}>{s.tag}</span>
+                <button
+                  onClick={e => { e.stopPropagation(); navigate('detalle', { skillId: s.id }); }}
+                  className={s.progress > 0 ? 'btn-3d btn-3d-tide' : 'btn-3d btn-3d-paper'}
+                  style={{ borderRadius: 999, padding: '7px 12px', fontSize: 11,
+                    display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  {s.progress > 0 ? 'Continuar' : 'Empezar'}
+                  <Icon name="arrow" size={11} color={s.progress > 0 ? '#fff' : 'var(--navy-900)'} strokeWidth={2.5} />
+                </button>
+              </div>
             </div>
           ))}
         </div>
