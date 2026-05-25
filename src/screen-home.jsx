@@ -9,6 +9,7 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
   const nextLevelXp = 500 - xpInLevel;
 
   const [activeCard, setActiveCard] = React.useState(0);
+  const [selectedCat, setSelectedCat] = React.useState('negociacion');
 
   const courses = [
     {
@@ -37,27 +38,69 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
     },
   ];
 
-  const skills = [
-    { id: 'negociacion', name: 'Negociación', icon: 'handshake', tag: 'En curso',
-      iconBg: 'var(--tide-100)', iconColor: 'var(--tide-700)',
-      tagColor: 'var(--tide-700)', tagBg: 'var(--tide-100)',
-      progress: 60, accent: true, accentColor: 'var(--tide-500)' },
-    { id: 'comunicacion', name: 'Comunicación efectiva', icon: 'message', tag: 'En curso',
-      iconBg: 'var(--azure-100)', iconColor: 'var(--azure-700)',
-      tagColor: 'var(--azure-700)', tagBg: 'var(--azure-100)', progress: 85 },
-    { id: 'feedback', name: 'Feedback', icon: 'feedback', tag: 'En curso',
-      iconBg: 'var(--violet-100)', iconColor: 'var(--violet-700)',
-      tagColor: 'var(--violet-700)', tagBg: 'var(--violet-100)', progress: 70 },
-    { id: 'liderazgo', name: 'Liderazgo de equipos', icon: 'users', tag: 'Recomendado',
-      iconBg: 'var(--amber-100)', iconColor: 'var(--amber-700)',
-      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 0 },
-    { id: 'decisiones', name: 'Toma de decisiones', icon: 'sliders', tag: 'Recomendado',
-      iconBg: 'var(--teal-100)', iconColor: 'var(--teal-700)',
-      tagColor: 'var(--paper-700)', tagBg: 'var(--paper-100)', progress: 0 },
-    { id: 'conflictos', name: 'Gestión de conflictos', icon: 'sparkles', tag: 'Gap detectado',
-      iconBg: 'var(--rose-100)', iconColor: 'var(--rose-700)',
-      tagColor: 'var(--lift-700)', tagBg: 'var(--lift-100)', progress: 0 },
-  ];
+  const diffColor = {
+    'Básico':      { tagBg: 'var(--tide-100)',   tagColor: 'var(--tide-700)'   },
+    'Intermedio':  { tagBg: 'var(--amber-100)',  tagColor: 'var(--amber-700)'  },
+    'Avanzado':    { tagBg: 'var(--rose-100)',   tagColor: 'var(--rose-700)'   },
+  };
+
+  const catalog = {
+    comunicacion: [
+      { id: 'comunicacion', name: 'Comunicación efectiva', icon: 'message',
+        iconBg: 'var(--azure-100)', iconColor: 'var(--azure-700)',
+        tag: 'Básico', progress: 85, xp: 30 },
+      { id: 'influir', name: 'Influir sin autoridad', icon: 'users',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Intermedio', progress: 0, xp: 45 },
+      { id: 'conversaciones', name: 'Gestionar conversaciones difíciles', icon: 'message',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Avanzado', progress: 0, xp: 65 },
+    ],
+    liderazgo: [
+      { id: 'feedback', name: 'Dar feedback', icon: 'feedback',
+        iconBg: 'var(--violet-100)', iconColor: 'var(--violet-700)',
+        tag: 'Básico', progress: 70, xp: 35 },
+      { id: 'liderazgo', name: 'Liderazgo de equipos', icon: 'users',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Intermedio', progress: 0, xp: 50 },
+      { id: 'delegar', name: 'Delegar con confianza', icon: 'sparkles',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Avanzado', progress: 0, xp: 70 },
+    ],
+    negociacion: [
+      { id: 'negociacion', name: 'Negociación', icon: 'handshake',
+        iconBg: 'var(--tide-100)', iconColor: 'var(--tide-700)',
+        tag: 'Básico', progress: 60, xp: 40, accent: true },
+      { id: 'anclaje', name: 'Anclaje y framing', icon: 'sliders',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Intermedio', progress: 0, xp: 50 },
+      { id: 'cierre', name: 'Cerrar acuerdos B2B', icon: 'handshake',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Avanzado', progress: 0, xp: 75 },
+    ],
+    conflictos: [
+      { id: 'feedback', name: 'Dar feedback', icon: 'feedback',
+        iconBg: 'var(--violet-100)', iconColor: 'var(--violet-700)',
+        tag: 'Básico', progress: 70, xp: 35 },
+      { id: 'conflictos', name: 'Gestión de conflictos', icon: 'sparkles',
+        iconBg: 'var(--rose-100)', iconColor: 'var(--rose-700)',
+        tag: 'Intermedio', progress: 20, xp: 50 },
+      { id: 'mediar', name: 'Mediar entre partes', icon: 'users',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Avanzado', progress: 0, xp: 65 },
+    ],
+    decisiones: [
+      { id: 'decisiones', name: 'Toma de decisiones', icon: 'sliders',
+        iconBg: 'var(--teal-100)', iconColor: 'var(--teal-700)',
+        tag: 'Básico', progress: 0, xp: 30 },
+      { id: 'presion', name: 'Decidir bajo presión', icon: 'timer',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Intermedio', progress: 0, xp: 45 },
+      { id: 'priorizacion', name: 'Priorización estratégica', icon: 'trending',
+        iconBg: 'var(--paper-100)', iconColor: 'var(--fg-2)',
+        tag: 'Avanzado', progress: 0, xp: 70 },
+    ],
+  };
 
   return (
     <div className="screen-in" style={{ paddingBottom: 110 }}>
@@ -166,8 +209,20 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
             }} />
           </div>
           <div style={{
-            fontSize: 12, color: 'var(--fg-3)', marginTop: 8, lineHeight: 1.4,
-          }}>¡<strong style={{ color: 'var(--navy-900)' }}>{20 - dailyMinutes} min</strong> y mantienes tu racha de hoy!</div>
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginTop: 8,
+          }}>
+            <div style={{ fontSize: 12, color: 'var(--fg-3)', lineHeight: 1.4 }}>
+              ¡<strong style={{ color: 'var(--navy-900)' }}>{20 - dailyMinutes} min</strong> y mantienes tu racha!
+            </div>
+            <button onClick={() => navigate('simulacion')}
+              className="btn-3d btn-3d-tide"
+              style={{ borderRadius: 999, padding: '8px 14px', fontSize: 12,
+                display: 'inline-flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+              ¡Practicar!
+              <Icon name="arrow" size={12} color="#fff" strokeWidth={2.5} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -272,16 +327,16 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
           overflowX: 'auto', paddingBottom: 4,
         }}>
           {[
+            { label: 'Negociación',           icon: 'handshake', id: 'negociacion' },
             { label: 'Comunicación',          icon: 'message',   id: 'comunicacion' },
             { label: 'Liderazgo',             icon: 'users',     id: 'liderazgo' },
-            { label: 'Negociación',           icon: 'handshake', id: 'negociacion' },
             { label: 'Gestión de conflictos', icon: 'sparkles',  id: 'conflictos' },
             { label: 'Toma de decisiones',    icon: 'sliders',   id: 'decisiones' },
           ].map((cat, i) => {
-            const selected = i === 0;
+            const selected = cat.id === selectedCat;
             return (
               <button key={cat.id}
-                onClick={() => navigate('detalle', { skillId: cat.id })}
+                onClick={() => setSelectedCat(cat.id)}
                 className="pressable"
                 style={{
                   flex: '0 0 88px',
@@ -312,18 +367,11 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
         </div>
       </div>
 
-      {/* Catalog */}
-      <div style={{ padding: '24px 20px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: 12 }}>
-          <Eyebrow>Tu catálogo de skills</Eyebrow>
-          <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--fg-3)', fontFamily: 'var(--font-mono)' }}>
-            {skills.length} activos
-          </span>
-        </div>
-
+      {/* Catalog filtered by category */}
+      <div style={{ padding: '16px 20px 0' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {skills.map(s => (
-            <button key={s.id} onClick={() => navigate('detalle', { skillId: s.id })}
+          {catalog[selectedCat].map(s => (
+            <div key={s.id} onClick={() => navigate('detalle', { skillId: s.id })}
               className="pressable" style={{
                 textAlign: 'left', cursor: 'pointer',
                 background: 'var(--paper-0)', border: s.accent ? '1px solid var(--tide-500)' : '1px solid var(--border)',
@@ -347,15 +395,24 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                   <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--navy-900)' }}>{s.name}</div>
                   <span style={{
                     fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase',
-                    color: s.tagColor, background: s.tagBg,
-                    padding: '2px 6px', borderRadius: 999,
+                    color: diffColor[s.tag]?.tagColor, background: diffColor[s.tag]?.tagBg,
+                    padding: '2px 6px', borderRadius: 999, flexShrink: 0,
                   }}>{s.tag}</span>
+                  <span style={{
+                    marginLeft: 'auto', flexShrink: 0,
+                    display: 'inline-flex', alignItems: 'center', gap: 3,
+                    fontSize: 11, fontFamily: 'var(--font-mono)',
+                    color: 'var(--tide-700)', fontWeight: 500,
+                  }}>
+                    <Icon name="zap" size={11} color="var(--tide-700)" />
+                    +{s.xp} XP
+                  </span>
                 </div>
                 <div style={{
                   height: 4, background: 'var(--paper-100)',
                   borderRadius: 999, overflow: 'hidden',
                 }}>
-                  {s.tag === 'En curso' ? (
+                  {s.progress > 0 ? (
                     <div style={{
                       height: '100%', width: s.progress + '%',
                       background: s.accent
@@ -370,8 +427,15 @@ window.HomeScreen = function HomeScreen({ state, navigate }) {
                   )}
                 </div>
               </div>
-              <Icon name="chevron" size={16} color="var(--fg-3)" />
-            </button>
+              <button
+                onClick={e => { e.stopPropagation(); navigate('detalle', { skillId: s.id }); }}
+                className={s.progress > 0 ? 'btn-3d btn-3d-tide' : 'btn-3d btn-3d-paper'}
+                style={{ borderRadius: 999, padding: '7px 12px', fontSize: 11,
+                  display: 'inline-flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+                {s.progress > 0 ? 'Continuar' : 'Empezar'}
+                <Icon name="arrow" size={11} color={s.progress > 0 ? '#fff' : 'var(--navy-900)'} strokeWidth={2.5} />
+              </button>
+            </div>
           ))}
         </div>
       </div>
